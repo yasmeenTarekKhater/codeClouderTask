@@ -1,6 +1,7 @@
 :root{
     --base-color:#3A9BFE;
     --base-nonactive-color:#93989A;
+    --sidebar-hover-color:#F5F7FF;
 
     --btn-bg-gray-color:#F7F6FE;
     --trade-btn-color:#1677FF;
@@ -10,4 +11,8 @@
 
 body{
     background-color:#F7F7F7;
+}
+
+a{
+    text-decoration: none;
 }
