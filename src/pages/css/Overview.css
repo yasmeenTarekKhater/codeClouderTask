@@ -1,0 +1,8 @@
+.printButton{
+    background-color: var(--base-color) !important;
+}
+.printButton:hover{
+    background-color: rgb(5, 124, 221) !important;
+    transform: scale(1.04);
+    transition: 1s;
+}

@@ -1,9 +1,12 @@
 import React from 'react'
+import  Button  from 'react-bootstrap/Button';
 
-const Button = () => {
+const CustomButton = ({customClass,children}) => {
   return (
-    <div>Button</div>
+    <Button className={customClass}>
+          {children}
+    </Button>
   )
 }
 
-export default Button
+export default CustomButton;

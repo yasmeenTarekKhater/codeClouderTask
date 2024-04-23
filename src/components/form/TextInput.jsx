@@ -1,8 +1,9 @@
 import React from 'react'
+import  Form  from 'react-bootstrap/Form'
 
-const TextInput = () => {
+const TextInput = ({customClass,placeholderText}) => {
   return (
-    <div>TextInput</div>
+    <Form.Control type="text" className={customClass} id="inputsearch" placeholder={placeholderText}/>
   )
 }
 

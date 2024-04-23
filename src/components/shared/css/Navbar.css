@@ -1,0 +1,30 @@
+.myNav{
+    background-color: white;
+}
+.myNav img{
+    width: 24px ;
+    height: 24px ;
+}
+.myNav .notifigationImg{
+    width: 36px ;
+    height: 34px ;
+    margin-left: -5px;
+}
+.searchNavbar{
+    width: 20vw !important;
+    padding-left: 40px !important;
+    background-color: rgba(235, 235, 235, 0.527) !important;
+}
+.searchNavbar::placeholder{
+    color: var(--base-nonactive-color) !important;
+}
+.seachInputNav{
+    position: relative;
+}
+.seachInputNav input{
+    position: absolute;
+}
+.seachInputNav img{
+    margin-left: 0.5vw;
+    z-index: 2;
+}
