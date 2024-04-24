@@ -1,77 +1,167 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Row  from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
+import { AiFillFire } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
+
 
 import print from "../assets/icons/fi-rr-print.png";
 import check from "../assets/icons/f-check.png";
 import deposit from "../assets/icons/deposit.png";
 import dotColor from "../assets/images/color.png";
 import dotColor2 from "../assets/images/color2.png";
+import refresh from "../assets/icons/fi-rr-refresh.png";
+
 import CustomButton from "../components/ui/Button";
 import BalanceContainer from "../components/ui/BalanceContainer";
-
-import './css/Overview.css';
 import BalanceProgress from "../components/ui/BalanceProgress";
 
+import "./css/Overview.css";
+import MarketTable from "../components/ui/MarketTable";
+import Converter from "../components/ui/Converter";
+import Payment from "../components/ui/Payment";
 
 const Overview = () => {
+  const [activeLink, setActiveLink] = useState(1);
+
+  const handleLinkClick = (pathNumber) => {
+    setActiveLink(pathNumber);
+  };
   return (
     <Container className="mt-3">
       <Row className="justify-content-between mb-2 pe-2">
         <h3 className="col-2">Overview</h3>
-        <CustomButton customClass="col-1 printButton">
-          <img src={print} alt='print' className="me-2"/>
-          Print
-        </CustomButton>
+        <CustomButton
+          customClass="col-1 printButton commonButton"
+          imageSource={print}
+          imagealt="print"
+          buttonTitle="Print"
+        ></CustomButton>
       </Row>
+
       <Row>
+        {/* -----------LeftSide-------------- */}
         <div className="col-9">
-           <div className="container rounded-4 py-3 totalBalanceContainer">
+          {/* ----------Balance Container------------ */}
+          <div className="container rounded-4 py-3 totalBalanceContainer">
             <Row className="justify-content-between">
               <div className="col-4">
-                  <h6>Total Balance</h6>
-                  <h3 className="d-flex">0.26231428 <Badge pill bg="warning"  className="ms-2 btcBadge" >BTC</Badge></h3>
-                  <h5 className="totalUSD">3,700.96 USD</h5>
+                <h6>Total Balance</h6>
+                <h3 className="d-flex">
+                  0.26231428{" "}
+                  <Badge pill bg="warning" className="ms-2 btcBadge">
+                    BTC
+                  </Badge>
+                </h3>
+                <h5 className="totalUSD">3,700.96 USD</h5>
               </div>
               <div className="col-4 d-flex justify-content-end gap-1 h-25">
-                <CustomButton customClass="withdrawBtn">
-                 <img src={check} alt="Withdraw" className="me-1"/>
-                  Withdraw
-                </CustomButton>
-                <CustomButton customClass="depositBtn">
-                  <img src={deposit} alt="Deposit" className="me-1"/>
-                  Deposit
-                </CustomButton>
+                <CustomButton
+                  customClass="withdrawBtn commonButton"
+                  imageSource={check}
+                  imagealt="Withdraw"
+                  buttonTitle="Withdraw"
+                ></CustomButton>
+                <CustomButton
+                  customClass="depositBtn commonButton"
+                  imageSource={deposit}
+                  imagealt="Deposit"
+                  buttonTitle="Deposit"
+                ></CustomButton>
               </div>
             </Row>
             <Row className="justify-content-between align-items-center mt-2">
               <div className="col-6 gap-2 d-flex ">
-                <BalanceContainer BalanceTitle='Exchange Balance' dotColor={dotColor}></BalanceContainer>
-                <BalanceContainer BalanceTitle='Asset Balances' dotColor={dotColor2}></BalanceContainer>
+                <BalanceContainer
+                  BalanceTitle="Exchange Balance"
+                  dotColor={dotColor}
+                ></BalanceContainer>
+                <BalanceContainer
+                  BalanceTitle="Asset Balances"
+                  dotColor={dotColor2}
+                ></BalanceContainer>
               </div>
               <div className="col-5 mb-3">
-                  <BalanceProgress 
-                  balanceTitle='Exchange Balance'
-                  balanceColor='warning'
+                <BalanceProgress
+                  balanceTitle="Exchange Balance"
+                  balanceColor="warning"
                   balanceNumber={45}
-                  ></BalanceProgress>
-                  <BalanceProgress 
-                  balanceTitle='Asset Balances'
-                  balanceColor='primary'
+                ></BalanceProgress>
+                <BalanceProgress
+                  balanceTitle="Asset Balances"
+                  balanceColor="primary"
                   balanceNumber={80}
-                  ></BalanceProgress>
+                ></BalanceProgress>
               </div>
             </Row>
-           </div>
-           <div className="container rounded-4 py-3 maketsContainer">
-             <h2>Market</h2>
-           </div>
+          </div>
+          {/* ----------End Balance Container------------ */}
+
+          {/* ----------Market Container------------ */}
+          <div className="container rounded-4 mt-3 py-1 maketsContainer">
+            <Row className="justify-content-between align-items-center">
+              <h5 className="col-2">Markets</h5>
+              <div className="col-6 d-flex align-items-center h-25">
+                <p className="col-9 mt-3">
+                  <span>Last Updated</span> 21 April 2024 | 08:21 PM
+                </p>
+                <CustomButton
+                  customClass="col-3 updateMarketBtn commonButton"
+                  imageSource={refresh}
+                  imagealt="refresh"
+                  buttonTitle="Update"
+                ></CustomButton>
+              </div>
+            </Row>
+            <Row>
+              <div className="d-flex gap-4">
+                <Link
+                  to="/"
+                  className={
+                    activeLink === 1 ? "maketsLinkActive" : "maketsLink"
+                  }
+                  onClick={() => handleLinkClick(1)}
+                >
+                  Spot Holdings
+                </Link>
+                <Link
+                  to="/"
+                  className={
+                    activeLink === 2 ? "maketsLinkActive" : "maketsLink"
+                  }
+                  onClick={() => handleLinkClick(2)}
+                >
+                  <AiFillFire className="me-1" />
+                  Hot
+                </Link>
+                <Link
+                  to="/"
+                  className={
+                    activeLink === 3 ? "maketsLinkActive" : "maketsLink"
+                  }
+                  onClick={() => handleLinkClick(3)}
+                >
+                  <AiFillHeart className="me-1" />
+                  Favorites
+                </Link>
+              </div>
+            </Row>
+            <hr/>
+            <MarketTable/>
+          </div>
+          {/* ---------- End Market Container ------------ */}
         </div>
+        {/* ----------- End LeftSide -------------- */}
+
+        {/* -----------RigthSide-------------- */}
         <div className="col-3 ">
-           <h2>top</h2>
-           <h2>bottom</h2>
+          <Converter/>
+          <Payment/>
         </div>
+        {/* ----------- End RigthSide-------------- */}
+
       </Row>
     </Container>
   );

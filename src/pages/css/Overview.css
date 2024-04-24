@@ -1,12 +1,17 @@
 .printButton{
     background-color: var(--base-color) !important;
+    border: none !important;
 }
 .printButton:hover{
     background-color: rgb(5, 124, 221) !important;
     transform: scale(1.04);
     transition: 1s;
 }
-
+.commonButton{
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+}
 /* ----------------------------Balances Section -------------------------- */
 .totalUSD{
     color: var(--text-gray-color);
@@ -26,18 +31,12 @@
 .withdrawBtn{
     background-color: var(--base-color) !important;
     border: none !important;
-    border-radius: 10px !important;
-    font-weight: 700 !important;
-    font-size: 13px !important;
 }
 
 .depositBtn{
     background-color: white !important;
     border: 1px solid var(--gray-border-color) !important;
     color: black !important;
-    border-radius: 10px !important;
-    font-weight: 700 !important;
-    font-size: 13px !important;
 }
 .exchangeAndAssets{
     border: var(--gray-border-color) 1px solid;
@@ -63,5 +62,31 @@ font-size: 14px;
 }
 /* ---------------------------- End Balances Section -------------------------- */
 
-
-
+/* ---------------------------- Market Section -------------------------- */
+.updateMarketBtn{
+    background-color: var(--base-color) !important;
+    border: none !important;
+}
+.maketsContainer{
+    background-color: white;
+}
+.maketsLink{
+    color: var(--text-gray-color);
+    padding-bottom: 10px;
+}
+.maketsLinkActive{
+    color: var(--base-color);
+    border-bottom: 3px solid var(--base-color);
+    padding-bottom: 10px;
+}
+table th:nth-child(2){
+    border-right: 1px solid var(--gray-border-color);
+    border-left: 1px solid var(--gray-border-color);
+}
+.tradebutton{
+    background-color: var( --trade-btn-color) !important;
+    color: white !important;
+    margin-top: -3px;
+ }
+ /* ---------------------------- End Market Section -------------------------- */
+ 

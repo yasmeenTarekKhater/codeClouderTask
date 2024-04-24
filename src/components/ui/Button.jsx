@@ -1,10 +1,11 @@
 import React from 'react'
 import  Button  from 'react-bootstrap/Button';
 
-const CustomButton = ({customClass,children}) => {
+const CustomButton = ({customClass,imageSource,imagealt,buttonTitle}) => {
   return (
     <Button className={customClass}>
-          {children}
+         <img className='me-1' src={imageSource} alt={imagealt}/>
+         {buttonTitle}
     </Button>
   )
 }
