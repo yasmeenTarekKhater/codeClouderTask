@@ -6,3 +6,62 @@
     transform: scale(1.04);
     transition: 1s;
 }
+
+/* ----------------------------Balances Section -------------------------- */
+.totalUSD{
+    color: var(--text-gray-color);
+}
+.btcBadge{
+    width: 53px;
+    height: 26px;
+    margin-top: 5px;
+}
+.badge{
+    font-size: 15px !important;
+    font-weight: 400 !important;
+}
+.totalBalanceContainer{
+    background-color: white;
+}
+.withdrawBtn{
+    background-color: var(--base-color) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+}
+
+.depositBtn{
+    background-color: white !important;
+    border: 1px solid var(--gray-border-color) !important;
+    color: black !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+}
+.exchangeAndAssets{
+    border: var(--gray-border-color) 1px solid;
+    border-radius: 12px;
+    padding: 6px 0;
+}
+.exchangeAndAssets h6:first-of-type{
+    font-size: 12px;
+    color: var(--text-gray-color);
+}
+.exchangeAndAssets h6:nth-child(2){
+font-size: 14px;
+}
+.exchangeAndAssets h6:last-of-type{
+    font-size: 13px;
+    color: var( --green-number-color);
+}
+.progressBarContainer p{
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: var(--text-gray-color);
+}
+/* ---------------------------- End Balances Section -------------------------- */
+
+
+

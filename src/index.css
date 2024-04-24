@@ -1,7 +1,11 @@
 :root{
     --base-color:#3A9BFE;
     --base-nonactive-color:#93989A;
+    --text-gray-color:#808191;
+    --gray-border-color:#dcdcdc;
+    --btc-orange-color:#FF9F38;
     --sidebar-hover-color:#F5F7FF;
+    --green-number-color:#4FBF67;
 
     --btn-bg-gray-color:#F7F6FE;
     --trade-btn-color:#1677FF;
