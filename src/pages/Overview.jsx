@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
 import { AiFillFire } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-
+import axios from 'axios';
 
 import print from "../assets/icons/fi-rr-print.png";
 import check from "../assets/icons/f-check.png";
@@ -17,15 +17,61 @@ import refresh from "../assets/icons/fi-rr-refresh.png";
 import CustomButton from "../components/ui/Button";
 import BalanceContainer from "../components/ui/BalanceContainer";
 import BalanceProgress from "../components/ui/BalanceProgress";
-
-import "./css/Overview.css";
 import MarketTable from "../components/ui/MarketTable";
 import Converter from "../components/ui/Converter";
 import Payment from "../components/ui/Payment";
 
+import "./css/Overview.css";
+
+
 const Overview = () => {
   const [activeLink, setActiveLink] = useState(1);
+  const [currenciesData, setcurrenciesData] = useState([]);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
 
+  const getUpdateData = () => {
+    axios
+      .get("https://api.coincap.io/v2/assets")
+      .then(function (response) {
+        // handle success
+        setcurrenciesData(response.data.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    //fetch data immediatly 
+    getUpdateData();
+    const updateData = setInterval(() => {
+      // Update every one minute
+      getUpdateData()
+      setLastUpdate(new Date());
+    }, 60000);
+
+    return () => {
+      clearInterval(updateData);
+    };
+  }, []);
+  
+  //also update data on clickon button
+  const handleUpdateClick = () => {
+    getUpdateData()
+    setLastUpdate(new Date());
+  };
+  
+  //format last update time day month year hour
+  const formattedLastUpdate = lastUpdate.toLocaleString(undefined, {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute:"numeric",
+    year:"numeric",
+    hour12: true,
+  });
+  // add custom class to each link clicked on [spot holding /hot/favourite]
   const handleLinkClick = (pathNumber) => {
     setActiveLink(pathNumber);
   };
@@ -105,13 +151,14 @@ const Overview = () => {
               <h5 className="col-2">Markets</h5>
               <div className="col-6 d-flex align-items-center h-25">
                 <p className="col-9 mt-3">
-                  <span>Last Updated</span> 21 April 2024 | 08:21 PM
+                  <span>Last Updated | </span> {formattedLastUpdate}
                 </p>
                 <CustomButton
                   customClass="col-3 updateMarketBtn commonButton"
                   imageSource={refresh}
                   imagealt="refresh"
                   buttonTitle="Update"
+                  handleUpdateClick={handleUpdateClick}
                 ></CustomButton>
               </div>
             </Row>
@@ -149,7 +196,7 @@ const Overview = () => {
               </div>
             </Row>
             <hr/>
-            <MarketTable/>
+            <MarketTable currenciesData={currenciesData} />
           </div>
           {/* ---------- End Market Container ------------ */}
         </div>

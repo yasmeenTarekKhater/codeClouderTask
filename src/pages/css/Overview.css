@@ -67,6 +67,11 @@ font-size: 14px;
     background-color: var(--base-color) !important;
     border: none !important;
 }
+.updateMarketBtn:hover{
+    background-color: rgba(131, 159, 180, 0.404) !important;
+    color: var(--base-color) !important;
+    border: 1px solid var(--base-color) !important;
+}
 .maketsContainer{
     background-color: white;
 }
@@ -79,6 +84,16 @@ font-size: 14px;
     border-bottom: 3px solid var(--base-color);
     padding-bottom: 10px;
 }
+.currencyImg{
+    width: 40px !important;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--btc-orange-color);
+}
+.currencyName{
+    color: var(--text-gray-color);
+    text-decoration: underline;
+}
 table th:nth-child(2){
     border-right: 1px solid var(--gray-border-color);
     border-left: 1px solid var(--gray-border-color);
@@ -87,6 +102,28 @@ table th:nth-child(2){
     background-color: var( --trade-btn-color) !important;
     color: white !important;
     margin-top: -3px;
+ }
+ .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    margin-top: 30px;
+    font-size:1.2rem;
+    gap: 5px;
+ }
+ .pagination .page-num,.pagination .next a:hover{
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+ }
+ .pagination .page-num:hover,.pagination .active,.pagination .next a:hover{
+    border: 1px solid var(--base-color);
+    color: var(--base-color)
+ }
+ .pagination a{
+ color: black ;
  }
  /* ---------------------------- End Market Section -------------------------- */
  
