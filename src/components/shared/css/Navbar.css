@@ -12,6 +12,7 @@
 }
 .searchNavbar{
     width: 20vw !important;
+    height: 34px;
     padding-left: 40px !important;
     background-color: rgba(235, 235, 235, 0.527) !important;
 }

@@ -90,3 +90,60 @@ table th:nth-child(2){
  }
  /* ---------------------------- End Market Section -------------------------- */
  
+/* ---------------------------- Converter Section -------------------------- */
+.converterContainer,.paymentContainer{
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+.fromtext,.totext{
+    font-weight: 700;
+    color: var(--text-gray-color);
+}
+.converterContainer p ,.swap p{
+    font-size: 13px;
+    font-weight: 700;
+}
+.amountContainer{
+background-color: rgba(220, 220, 220, 0.425);
+border-radius: 10px;
+}
+.amountContainer>p{
+    color: var(--text-gray-color);
+    margin-bottom: 5px;
+}
+.amountContainer p:last-child{
+    color: var(--btc-orange-color);
+}
+.questionicon{
+    color: var(--text-gray-color);
+}
+.swap{
+    border: 1px solid var(--gray-border-color);
+    border-radius: 11px;
+    height: 77px;
+    padding: 3px 10px;
+}
+.swap div:nth-child(2){
+    border-top: 1px solid var(--gray-border-color);
+    padding-top: 5px;
+}
+/* ---------------------------- End Converter Section -------------------------- */
+
+/* ---------------------------- Payment Section -------------------------- */
+.activeBuyAndSellBtn{
+    background-color: var( --sidebar-hover-color) !important;
+    color: var(--base-color) !important;
+    border-color: var(--gray-border-color) !important;
+}
+.buyAndSellBtn{
+    background-color: white !important;
+    border: none !important;
+    color: var(--text-gray-color) !important; 
+}
+.totalPament{
+    color: var(--text-gray-color);
+    padding: 19px 0;
+}
+/* ---------------------------- End Payment Section -------------------------- */
+
