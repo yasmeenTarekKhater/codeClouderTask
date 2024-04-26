@@ -13,9 +13,13 @@ const Converter = () => {
             <p className='ms-1'>Amount <BsQuestionCircle className='ms-1 questionicon' /></p>
             <TextInput customClass="h-25" placeholderText="0.00"/>
             <Row className='justify-content-center gap-1 mt-3 mb-2 align-items-center'>
-              <FromAndTo customClass='col-9 swap'></FromAndTo>
-              <div className='col-2 swap'>
-                  <img src={swap} alt='swap' className='mt-4 w-100'/>
+              <div className='col-9 swap'>
+              <FromAndTo  customTitle="From"/>
+              <div className='divider'></div>
+              <FromAndTo  customTitle="To"/>
+              </div>
+              <div className='col-2 swap swapImg'>
+                  <img src={swap} alt='swap' className='mt-4 w-100 '/>
               </div>
             </Row>
             <div className="container amountContainer">

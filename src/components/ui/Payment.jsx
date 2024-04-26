@@ -22,7 +22,11 @@ const Payment = () => {
             <h1 >$0</h1>
             <p>You can buy up to $25,000</p>
         </div>
-        <FromAndTo customClass='swap mb-2'></FromAndTo>
+        <div className='mb-2 swap'>
+        <FromAndTo  customTitle="Buy"></FromAndTo>
+        <div className='divider'></div>
+        <FromAndTo  customTitle="Pay With"></FromAndTo>
+        </div>
         <CustomButton
             customClass="col-12  updateMarketBtn commonButton"
             buttonTitle="Buy"

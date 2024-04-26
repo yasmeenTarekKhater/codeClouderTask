@@ -158,12 +158,23 @@ border-radius: 10px;
 .swap{
     border: 1px solid var(--gray-border-color);
     border-radius: 11px;
-    height: 77px;
+    min-height: 80px;
     padding: 3px 10px;
 }
-.swap div:nth-child(2){
-    border-top: 1px solid var(--gray-border-color);
-    padding-top: 5px;
+.swapImg{
+    cursor: pointer;
+    transition: 0.4s;
+}
+.swapImg:hover{
+ background-color: var(--gray-border-color);
+ border: 1px solid var(--base-color);
+ transform: scale(1.04);
+}
+.divider{
+    width: 90%;
+    height: 1px;
+    background-color: var(--gray-border-color);
+    margin: 5px 0;
 }
 /* ---------------------------- End Converter Section -------------------------- */
 
@@ -183,4 +194,17 @@ border-radius: 10px;
     padding: 19px 0;
 }
 /* ---------------------------- End Payment Section -------------------------- */
+
+/* ---------------------------- select with search Section -------------------------- */
+.selectContainer{
+    background-color: aqua;
+}
+.showselect{
+    display: block;
+}
+.hideselect{
+    display: none;
+}
+/* ---------------------------- select with search Section -------------------------- */
+
 
