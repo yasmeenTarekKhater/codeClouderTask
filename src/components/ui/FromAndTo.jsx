@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import { AiOutlineRight } from "react-icons/ai";
 import { AiOutlineDown } from "react-icons/ai";
-import Select from 'react-select';
+import SelectOption from "./SelectOption";
 
-const FromAndTo = ({ customTitle }) => {
+
+const FromAndTo = ({ customTitle ,selectData }) => {
+  // handle changeing icon and show hide select options
   const [rigthDownIcon,setrigthDownIcon]=useState(false);
   const handlerigthDown=()=>{
-    setrigthDownIcon(!rigthDownIcon)
+    setrigthDownIcon(!rigthDownIcon);
   }
   return (
       <div className="container text-start">
@@ -24,7 +26,7 @@ const FromAndTo = ({ customTitle }) => {
           </span>
         </Row>
         <div className={`selectContainer ${rigthDownIcon?'showselect':'hideselect'}`}>
-          Show
+        <SelectOption selectData={selectData}></SelectOption>
         </div>
       </div>
   );

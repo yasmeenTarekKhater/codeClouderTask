@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext} from 'react'
 import Row from 'react-bootstrap/Row'
 import CustomButton from './Button'
 import FromAndTo from './FromAndTo'
+import { currencyContext } from '../../context/currencyContext';
 
+const colors= [
+    {value:"coin 1",label:"Coin 1",isFixed:true},
+    {value:"coin3",label:"Coin3"}
+  ];
 const Payment = () => {
+  const {currencies}=useContext(currencyContext);
   return (
     <div className='container paymentContainer mb-5'>
         <Row className='justify-content-center gap-2 mb-3'>
@@ -23,9 +29,9 @@ const Payment = () => {
             <p>You can buy up to $25,000</p>
         </div>
         <div className='mb-2 swap'>
-        <FromAndTo  customTitle="Buy"></FromAndTo>
+        <FromAndTo  customTitle="Buy" selectData={currencies}></FromAndTo>
         <div className='divider'></div>
-        <FromAndTo  customTitle="Pay With"></FromAndTo>
+        <FromAndTo  customTitle="Pay With" selectData={colors}></FromAndTo>
         </div>
         <CustomButton
             customClass="col-12  updateMarketBtn commonButton"

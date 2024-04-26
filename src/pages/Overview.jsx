@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
 import { AiFillFire } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import axios from 'axios';
+import axios from "axios";
 
 import print from "../assets/icons/fi-rr-print.png";
 import check from "../assets/icons/f-check.png";
@@ -20,15 +20,24 @@ import BalanceProgress from "../components/ui/BalanceProgress";
 import MarketTable from "../components/ui/MarketTable";
 import Converter from "../components/ui/Converter";
 import Payment from "../components/ui/Payment";
+import { currencyContext } from "../context/currencyContext";
+import formatCurrencies from "../utils/formatCurrencies";
 
 import "./css/Overview.css";
-
 
 const Overview = () => {
   const [activeLink, setActiveLink] = useState(1);
   const [currenciesData, setcurrenciesData] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const { currencies, handleCurrency } = useContext(currencyContext);
 
+  // set currencyContext with new format to show in SelectOption
+  const newFormat = formatCurrencies(currenciesData);
+  useEffect(() => {
+    handleCurrency(newFormat);
+  }, [currenciesData]);
+
+  // fetching data
   const getUpdateData = () => {
     axios
       .get("https://api.coincap.io/v2/assets")
@@ -43,11 +52,11 @@ const Overview = () => {
   };
 
   useEffect(() => {
-    //fetch data immediatly 
+    //fetch data immediatly
     getUpdateData();
     const updateData = setInterval(() => {
       // Update every one minute
-      getUpdateData()
+      getUpdateData();
       setLastUpdate(new Date());
     }, 60000);
 
@@ -55,32 +64,37 @@ const Overview = () => {
       clearInterval(updateData);
     };
   }, []);
-  
+
   //also update data on clickon button
   const handleUpdateClick = () => {
-    getUpdateData()
+    getUpdateData();
     setLastUpdate(new Date());
   };
-  
+
   //format last update time day month year hour
-  const formattedLastUpdate = lastUpdate.toLocaleString(undefined, {
-    day: "numeric",
-    month: "short",
-    hour: "numeric",
-    minute:"numeric",
-    year:"numeric",
-    hour12: true,
-  });
+  const formattedLastUpdate = useMemo(
+    () => lastUpdate.toLocaleString(undefined, {
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "numeric",
+      year: "numeric",
+      hour12: true,
+    }),
+    [lastUpdate]
+  );
+
   // add custom class to each link clicked on [spot holding /hot/favourite]
   const handleLinkClick = (pathNumber) => {
     setActiveLink(pathNumber);
   };
+
   return (
     <Container className="mt-3">
-      <Row className="justify-content-between mb-2 pe-2">
-        <h3 className="col-2">Overview</h3>
+      <Row className="justify-content-sm-center justify-content-md-between  mb-2 pe-2">
+        <h3 className="col-6 col-sm-6 col-lg-2">Overview</h3>
         <CustomButton
-          customClass="col-1 printButton commonButton"
+          customClass="col-6 col-sm-5 col-lg-1 printButton commonButton"
           imageSource={print}
           imagealt="print"
           buttonTitle="Print"
@@ -89,7 +103,7 @@ const Overview = () => {
 
       <Row>
         {/* -----------LeftSide-------------- */}
-        <div className="col-9">
+        <div className="col-12 col-lg-9">
           {/* ----------Balance Container------------ */}
           <div className="container rounded-4 py-3 totalBalanceContainer">
             <Row className="justify-content-between">
@@ -195,7 +209,7 @@ const Overview = () => {
                 </Link>
               </div>
             </Row>
-            <hr/>
+            <hr />
             <MarketTable currenciesData={currenciesData} />
           </div>
           {/* ---------- End Market Container ------------ */}
@@ -203,12 +217,11 @@ const Overview = () => {
         {/* ----------- End LeftSide -------------- */}
 
         {/* -----------RigthSide-------------- */}
-        <div className="col-3 ">
-          <Converter/>
-          <Payment/>
+        <div className="col-12 col-lg-3 ">
+          <Converter />
+          <Payment />
         </div>
         {/* ----------- End RigthSide-------------- */}
-
       </Row>
     </Container>
   );
