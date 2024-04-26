@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -6,6 +6,7 @@ import Badge from "react-bootstrap/Badge";
 import { AiFillFire } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import axios from "axios";
+import { useReactToPrint } from "react-to-print";
 
 import print from "../assets/icons/fi-rr-print.png";
 import check from "../assets/icons/f-check.png";
@@ -30,8 +31,17 @@ const Overview = () => {
   const [currenciesData, setcurrenciesData] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const { currencies, handleCurrency } = useContext(currencyContext);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const componentRef1 = useRef(null); //handle printing
 
-  // set currencyContext with new format to show in SelectOption
+  const handlePrint = useReactToPrint({
+    documentTitle: "Print This Document",
+    onBeforePrint: () => console.log("before printing..."),
+    onAfterPrint: () => console.log("after printing..."),
+    removeAfterPrint: true,
+  });
+
+  // set currencyContext with new data format to show in SelectOption
   const newFormat = formatCurrencies(currenciesData);
   useEffect(() => {
     handleCurrency(newFormat);
@@ -44,6 +54,7 @@ const Overview = () => {
       .then(function (response) {
         // handle success
         setcurrenciesData(response.data.data);
+        setIsLoading(false);
       })
       .catch(function (error) {
         // handle error
@@ -65,7 +76,7 @@ const Overview = () => {
     };
   }, []);
 
-  //also update data on clickon button
+  //also update data on click on update button
   const handleUpdateClick = () => {
     getUpdateData();
     setLastUpdate(new Date());
@@ -73,14 +84,15 @@ const Overview = () => {
 
   //format last update time day month year hour
   const formattedLastUpdate = useMemo(
-    () => lastUpdate.toLocaleString(undefined, {
-      day: "numeric",
-      month: "short",
-      hour: "numeric",
-      minute: "numeric",
-      year: "numeric",
-      hour12: true,
-    }),
+    () =>
+      lastUpdate.toLocaleString(undefined, {
+        day: "numeric",
+        month: "short",
+        hour: "numeric",
+        minute: "numeric",
+        year: "numeric",
+        hour12: true,
+      }),
     [lastUpdate]
   );
 
@@ -93,21 +105,28 @@ const Overview = () => {
     <Container className="mt-3">
       <Row className="justify-content-sm-center justify-content-md-between  mb-2 pe-2">
         <h3 className="col-6 col-sm-6 col-lg-2">Overview</h3>
+        <span className="col-6 col-sm-5 col-lg-2"
+        onClick={() => {
+          handlePrint(null, () => componentRef1.current);
+        }}
+        >
         <CustomButton
-          customClass="col-6 col-sm-5 col-lg-1 printButton commonButton"
-          imageSource={print}
-          imagealt="print"
-          buttonTitle="Print"
-        ></CustomButton>
+               customClass=" printButton commonButton"
+                 imageSource={print}
+                 imagealt="print"
+                buttonTitle="Print"
+          ></CustomButton>
+        </span>
       </Row>
 
       <Row>
         {/* -----------LeftSide-------------- */}
         <div className="col-12 col-lg-9">
           {/* ----------Balance Container------------ */}
-          <div className="container rounded-4 py-3 totalBalanceContainer">
+          <div ref={componentRef1}
+            className="container rounded-4 py-3 totalBalanceContainer">
             <Row className="justify-content-between">
-              <div className="col-4">
+              <div className="col-10 col-lg-4">
                 <h6>Total Balance</h6>
                 <h3 className="d-flex">
                   0.26231428{" "}
@@ -117,7 +136,7 @@ const Overview = () => {
                 </h3>
                 <h5 className="totalUSD">3,700.96 USD</h5>
               </div>
-              <div className="col-4 d-flex justify-content-end gap-1 h-25">
+              <div className="col-10 col-lg-4 d-flex justify-content-md-start justify-content-lg-end gap-1 h-25">
                 <CustomButton
                   customClass="withdrawBtn commonButton"
                   imageSource={check}
@@ -133,7 +152,7 @@ const Overview = () => {
               </div>
             </Row>
             <Row className="justify-content-between align-items-center mt-2">
-              <div className="col-6 gap-2 d-flex ">
+              <div className="col-12 col-lg-6 gap-2 d-flex ">
                 <BalanceContainer
                   BalanceTitle="Exchange Balance"
                   dotColor={dotColor}
@@ -143,7 +162,7 @@ const Overview = () => {
                   dotColor={dotColor2}
                 ></BalanceContainer>
               </div>
-              <div className="col-5 mb-3">
+              <div className="col-12 col-lg-5 mb-3">
                 <BalanceProgress
                   balanceTitle="Exchange Balance"
                   balanceColor="warning"
@@ -210,7 +229,10 @@ const Overview = () => {
               </div>
             </Row>
             <hr />
-            <MarketTable currenciesData={currenciesData} />
+            <MarketTable
+              currenciesData={currenciesData}
+              isLoading={isLoading}
+            />
           </div>
           {/* ---------- End Market Container ------------ */}
         </div>

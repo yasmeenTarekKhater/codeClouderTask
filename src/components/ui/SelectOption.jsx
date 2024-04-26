@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Select from 'react-select';
 
 
@@ -27,7 +27,11 @@ const formatGroupLabel = (data) => (
     </div>
 );
 
-const SelectOption = ({selectData}) => {
+const SelectOption = ({selectData,handleSelectedCoin}) => {
+   const handleChange = (selectedOption) => {
+    handleSelectedCoin(selectedOption.label);
+   };
+
     const groupedOptions= [
         {
           label: 'Currencies',
@@ -35,10 +39,11 @@ const SelectOption = ({selectData}) => {
         }
     ];
     return (
-        <Select
+      <Select
         defaultValue={selectData[1]}
         options={groupedOptions}
         formatGroupLabel={formatGroupLabel}
+        onChange={handleChange}
       />
     )
 }

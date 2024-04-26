@@ -12,17 +12,17 @@ const Converter = () => {
   const {currencies}=useContext(currencyContext);
   // console.log(currencies);
   return (
-    <div className="container mb-3 mt-3 p-3 converterContainer">
+    <div className="container mb-3 mt-3 mt-lg-0 p-3 converterContainer">
             <h5>Converter</h5>
             <p className='ms-1'>Amount <BsQuestionCircle className='ms-1 questionicon' /></p>
             <TextInput customClass="h-25" placeholderText="0.00"/>
             <Row className='justify-content-center gap-1 mt-3 mb-2 align-items-center'>
-              <div className='col-9 swap'>
+              <div className=' col-9 col-xl-9 swap'>
               <FromAndTo  customTitle="From" selectData={currencies}/>
               <div className='divider'></div>
               <FromAndTo  customTitle="To" selectData={currencies}/>
               </div>
-              <div className='col-2 swap swapImg text-center'>
+              <div className='col-9 col-xl-2 swap swapImg text-center'>
                   <img src={swap} alt='swap' className='mt-4'/>
               </div>
             </Row>

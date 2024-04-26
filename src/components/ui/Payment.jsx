@@ -1,13 +1,11 @@
-import React, { useContext} from 'react'
-import Row from 'react-bootstrap/Row'
-import CustomButton from './Button'
-import FromAndTo from './FromAndTo'
+import React, { useContext} from 'react';
+import Row from 'react-bootstrap/Row';
+import CustomButton from './Button';
+import FromAndTo from './FromAndTo';
 import { currencyContext } from '../../context/currencyContext';
+import {paymentMethods} from '../../data/PaymentMethods.js';
 
-const colors= [
-    {value:"coin 1",label:"Coin 1",isFixed:true},
-    {value:"coin3",label:"Coin3"}
-  ];
+
 const Payment = () => {
   const {currencies}=useContext(currencyContext);
   return (
@@ -31,7 +29,7 @@ const Payment = () => {
         <div className='mb-2 swap'>
         <FromAndTo  customTitle="Buy" selectData={currencies}></FromAndTo>
         <div className='divider'></div>
-        <FromAndTo  customTitle="Pay With" selectData={colors}></FromAndTo>
+        <FromAndTo  customTitle="Pay With" selectData={paymentMethods}></FromAndTo>
         </div>
         <CustomButton
             customClass="col-12  updateMarketBtn commonButton"

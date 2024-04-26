@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import CustomButton from "./Button";
 import { Row } from "react-bootstrap";
 import ReactPaginate from 'react-paginate';
+import Loading from "./Loading";
 
-const MarketTable = ({ currenciesData }) => {
+const MarketTable = ({ currenciesData ,isLoading }) => {
+  //handling pagination
   const [itemOffset, setItemOffset] = useState(0);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -31,7 +33,9 @@ const MarketTable = ({ currenciesData }) => {
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
+        {!isLoading
+        ?(
+          <tbody>
           {currentItems.map((currency) => {
             const formattedPrice = parseFloat(currency.priceUsd).toFixed(2);
             const formattedPercent24 = parseFloat(currency.changePercent24Hr).toFixed(2);
@@ -54,7 +58,11 @@ const MarketTable = ({ currenciesData }) => {
               </tr>
             );
           })}
-        </tbody>
+        </tbody>)
+        :(
+          <Loading/>
+        )}
+        
       </table>
       <ReactPaginate
         breakLabel="..."

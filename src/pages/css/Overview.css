@@ -2,11 +2,6 @@
     background-color: var(--base-color) !important;
     border: none !important;
 }
-.printButton:hover{
-    background-color: rgb(5, 124, 221) !important;
-    transform: scale(1.04);
-    transition: 1s;
-}
 .commonButton{
     border-radius: 10px !important;
     font-weight: 700 !important;
@@ -67,7 +62,7 @@ font-size: 14px;
     background-color: var(--base-color) !important;
     border: none !important;
 }
-.updateMarketBtn:hover{
+.updateMarketBtn:hover,.printButton:hover{
     background-color: rgba(131, 159, 180, 0.404) !important;
     color: var(--base-color) !important;
     border: 1px solid var(--base-color) !important;
@@ -196,9 +191,6 @@ border-radius: 10px;
 /* ---------------------------- End Payment Section -------------------------- */
 
 /* ---------------------------- select with search Section -------------------------- */
-.selectContainer{
-    background-color: aqua;
-}
 .showselect{
     display: block;
 }

@@ -21,9 +21,9 @@ function MyNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/setting"><img src={setting} alt="setting"/></Nav.Link>
-            <Nav.Link href="/notifigation"><img src={notification} className='notifigationImg' alt="notification"/></Nav.Link>
-            <Nav.Link href="/profile"><img src={profile} alt="profile"/></Nav.Link>
+            <Nav.Link href="#"><img src={setting} alt="setting"/></Nav.Link>
+            <Nav.Link href="#"><img src={notification} className='notifigationImg' alt="notification"/></Nav.Link>
+            <Nav.Link href="#"><img src={profile} alt="profile"/></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
